@@ -3,6 +3,8 @@ package spring_performance_test.config;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.IpAddressMatcher;
@@ -32,7 +34,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
 
-        http.authorizeHttpRequests(auth -> auth
+        http .csrf(csrf -> csrf
+                .ignoringRequestMatchers(
+                        "/api/test-data/seed",
+                        "/api/records",
+                        "/api/records/**"
+                )
+        ).authorizeHttpRequests(auth -> auth
 
                 .requestMatchers(
                         "/v3/api-docs",
@@ -45,7 +53,15 @@ public class SecurityConfig {
                                 isAllowedIp(context.getRequest())
                         )
                 )
-
+                .requestMatchers(
+                        HttpMethod.POST,
+                        "/api/test-data/seed"
+                )
+                .access((authentication, context) ->
+                        new AuthorizationDecision(
+                                isAllowedIp(context.getRequest())
+                        )
+                )
                 .anyRequest().permitAll()
         );
 

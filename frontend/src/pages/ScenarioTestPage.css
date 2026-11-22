@@ -1,0 +1,142 @@
+.scenario-page .workspace > .panel {
+    min-width: 0;
+}
+
+.scenario-page .api-info,
+.scenario-page .scenario-step-path {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.scenario-add-icon {
+    flex-shrink: 0;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.scenario-step-list {
+    display: grid;
+    gap: 8px;
+}
+
+.scenario-step-list .api-item {
+    align-items: center;
+}
+
+.scenario-step-number {
+    flex-shrink: 0;
+    min-width: 24px;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.scenario-step-path {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.scenario-step-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.scenario-step-header h3 {
+    margin: 0;
+}
+
+.scenario-step-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.scenario-step-actions button,
+.scenario-extract-row button {
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    background: #fff;
+    color: #475569;
+    font-size: 12px;
+}
+
+.scenario-step-actions .scenario-delete-button {
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.scenario-step-actions button:hover:not(:disabled),
+.scenario-extract-row button:hover:not(:disabled) {
+    background: #f1f5f9;
+}
+
+.scenario-extract-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.scenario-extract-row .field {
+    min-width: 0;
+    margin: 0;
+}
+
+.scenario-extract-row input {
+    box-sizing: border-box;
+}
+
+.scenario-extract-row button {
+    min-height: 42px;
+}
+
+.scenario-page .request-preview-code {
+    max-height: 500px;
+    overflow: auto;
+}
+
+@media (max-width: 600px) {
+    .scenario-extract-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.scenario-page #scenario-response-sample {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9e0e9;
+    border-radius: 8px;
+    font-family: monospace;
+    resize: vertical;
+}
+
+.scenario-extract-row {
+    align-items: start;
+}
+
+.scenario-extract-row select {
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.scenario-extract-row small {
+    overflow-wrap: anywhere;
+}
+
+.scenario-extract-row button {
+    margin-top: 24px;
+}
+
+@media (max-width: 600px) {
+    .scenario-extract-row button {
+        margin-top: 0;
+    }
+}

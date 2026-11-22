@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: performance-postgres
+    environment:
+      POSTGRES_DB: performance
+      POSTGRES_USER: performance
+      POSTGRES_PASSWORD: performance123
+    ports:
+      - "5300:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

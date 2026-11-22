@@ -2,6 +2,16 @@ server:
   port: 8080
 
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5300/performance
+    username: performance
+    password: performance123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
   application:
     name: spring-performance-test
 
@@ -11,3 +21,4 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     enabled: true
+

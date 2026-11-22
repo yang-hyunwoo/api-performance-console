@@ -1,0 +1,149 @@
+.history-page .panel {
+    border-color: #dce5ef;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(30, 55, 85, 0.05);
+}
+
+.history-page .history-comparison {
+    border-top: 3px solid #2563eb;
+}
+
+.history-page .history-comparison .settings-grid > .field {
+    margin-bottom: 8px;
+}
+
+.history-page .history-comparison .muted {
+    margin: 4px 0 16px;
+    overflow-wrap: anywhere;
+}
+
+.history-page .history-comparison-note {
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    background: #fffbeb;
+    color: #78350f;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+
+.history-page .history-table-scroll {
+    overflow-x: auto;
+    border: 1px solid #e0e8f2;
+    border-radius: 10px;
+}
+
+.history-page .history-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 13px;
+}
+
+.history-page .history-table th,
+.history-page .history-table td {
+    padding: 13px 12px;
+    border-bottom: 1px solid #e7edf5;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.history-page .history-table thead {
+    background: #edf3fa;
+    color: #334155;
+    white-space: nowrap;
+}
+
+.history-page .history-table tbody tr:nth-child(even) {
+    background: #f8fafd;
+}
+
+.history-page .history-table tbody tr:hover {
+    background: #eef5ff;
+}
+
+.history-page .history-table tbody tr:last-child > * {
+    border-bottom: 0;
+}
+
+.history-page .history-table td {
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.history-page .history-table .history-metric {
+    text-align: right;
+}
+
+.history-page .history-request {
+    min-width: 150px;
+    overflow-wrap: anywhere;
+}
+
+.history-page .history-table small {
+    display: block;
+    margin-top: 4px;
+    color: #475569;
+    font-weight: 400;
+}
+
+.history-page .history-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #eef2f7;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.history-page .history-badge--single {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.history-page .history-badge--scenario {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.history-page .history-badge--completed,
+.history-page .history-badge--improved {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.history-page .history-badge--cancelled {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.history-page .history-badge--error,
+.history-page .history-badge--worse {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.history-page .history-more {
+    margin-top: 16px;
+}
+
+@media (max-width: 640px) {
+    .history-page .history-table th,
+    .history-page .history-table td {
+        padding: 10px;
+    }
+}
+
+.history-page .history-search-grid input {
+    margin-bottom: 4px;
+}
+
+.history-page .history-search-grid small.muted {
+    margin: 0;
+    font-size: 12px;
+}

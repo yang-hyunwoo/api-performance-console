@@ -1,0 +1,54 @@
+.request-headers-editor .request-header-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.request-headers-editor .request-header-row .field {
+    min-width: 0;
+    margin: 0;
+}
+
+.request-headers-editor .request-header-row input {
+    box-sizing: border-box;
+}
+
+.request-headers-editor .request-header-actions {
+    margin: 0 0 16px;
+}
+
+.request-headers-editor button.request-header-button {
+    min-height: 42px;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #fff;
+    color: #334155;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.request-headers-editor button.request-header-button:hover:not(:disabled) {
+    background: #f1f5f9;
+}
+
+.request-headers-editor button.request-header-button--remove {
+    border-color: #fecaca;
+    color: #b91c1c;
+}
+
+.request-headers-editor button.request-header-button--remove:hover:not(:disabled) {
+    background: #fef2f2;
+}
+
+@media (max-width: 640px) {
+    .request-headers-editor .request-header-row {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .request-headers-editor .request-header-row button {
+        justify-self: start;
+    }
+}

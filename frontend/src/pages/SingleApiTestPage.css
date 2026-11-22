@@ -1,0 +1,1181 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f6f8fb;
+    color: #172033;
+    font-family: Arial, "Noto Sans KR", sans-serif;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.container {
+    width: min(1200px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+.header {
+    background: #fff;
+    border-bottom: 1px solid #e5e9f0;
+    padding: 32px 0;
+}
+
+.eyebrow {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.header h1 {
+    margin: 10px 0 8px;
+    font-size: 28px;
+}
+
+.header p,
+.muted {
+    color: #64748b;
+    font-size: 14px;
+}
+
+.main {
+    padding: 28px 0 60px;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid #e5e9f0;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.panel h2 {
+    margin: 0 0 20px;
+    font-size: 17px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.field label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #d9e0e9;
+    border-radius: 8px;
+    background: #fff;
+    color: #172033;
+}
+
+.field input:focus,
+.field select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+button:not(.api-item) {
+    padding: 11px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px;
+}
+
+.api-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 550px;
+    overflow-y: auto;
+}
+
+.api-item {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    text-align: left;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid #e5e9f0;
+    border-radius: 9px;
+}
+
+.api-item.active {
+    border-color: #2563eb;
+    background: #eff6ff;
+}
+
+.method {
+    display: inline-flex;
+    padding: 4px 8px;
+    border-radius: 5px;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.api-info {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.api-info strong {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.api-info small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.selected-api {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    overflow-wrap: anywhere;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.run-button {
+    width: 100%;
+}
+
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 10px;
+    background: #f6f8fb;
+}
+
+.metric span {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.metric strong {
+    font-size: 22px;
+}
+
+.error {
+    margin-bottom: 20px;
+    padding: 14px;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+@media (max-width: 800px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: min(100% - 24px, 1200px);
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.metric {
+    transition: border-color 0.2s ease;
+}
+
+.metric.fast {
+    border: 1px solid #22c55e;
+}
+
+.metric.fast strong,
+.metric.fast .metric-status {
+    color: #16a34a;
+}
+
+.metric.warning {
+    border: 1px solid #f59e0b;
+}
+
+.metric.warning strong,
+.metric.warning .metric-status {
+    color: #d97706;
+}
+
+.metric.slow {
+    border: 1px solid #ef4444;
+}
+
+.metric.slow strong,
+.metric.slow .metric-status {
+    color: #dc2626;
+}
+
+.metric-status {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.required-mark {
+    color: #ef4444;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.parameter-type {
+    margin-left: 8px;
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* API 목록 기본 스타일 */
+.api-item {
+    color: #0f172a;
+}
+
+/* 선택된 API */
+.api-item.active {
+    background-color: #eff6ff;
+    border: 1px solid #2563eb;
+    color: #0f172a;
+}
+
+/* API 경로 */
+.api-item .api-info strong {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* API 설명 */
+.api-item .api-info small {
+    color: #64748b;
+}
+
+/* 선택 상태에서도 글자색 유지 */
+.api-item.active .api-info strong {
+    color: #0f172a;
+}
+
+.api-item.active .api-info small {
+    color: #475569;
+}
+
+.readonly-input {
+    background-color: #f1f5f9;
+    color: #475569;
+    cursor: not-allowed;
+}
+
+.method.get {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.method.post {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.method.put {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.method.patch {
+    background: #f3e8ff;
+    color: #7e22ce;
+}
+
+.method.delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* 전체 스크롤바 */
+html {
+    color-scheme: light;
+    scrollbar-color: #cbd5e1 #f8fafc;
+    scrollbar-width: thin;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 브라우저 기본 다크 스크롤바 방지 */
+:root {
+    color-scheme: light;
+}
+
+/* 스크롤바 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* 스크롤바 배경 */
+::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+/* 스크롤바 손잡이 */
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+    border: 2px solid #f8fafc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* 위아래 화살표 버튼 제거 */
+::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+/* 스크롤바 모서리 */
+::-webkit-scrollbar-corner {
+    background: #f8fafc;
+}
+
+.parameter-description {
+    margin-left: 6px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #64748b;
+}
+
+.method-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.method-filter {
+    padding: 7px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background: #fff;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.method-filter:hover {
+    background: #f1f5f9;
+}
+
+.method-filter.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+.method-filters .method-filter {
+    background: #ffffff;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+}
+
+.method-filters .method-filter.active {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+.method-filters .method-filter:hover:not(.active) {
+    background: #f1f5f9;
+}
+
+/* HTTP Method 필터 영역 */
+.method-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+/* 기본 버튼 */
+.method-filters button.method-filter {
+    width: auto;
+    min-width: 0;
+    height: 28px;
+    padding: 0 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+/* 마우스 올렸을 때 */
+.method-filters button.method-filter:hover:not(.active) {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+}
+
+/* 선택된 버튼 */
+.method-filters button.method-filter.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+}
+
+.method-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.method-filters button.method-filter {
+    width: auto;
+    min-width: 0;
+    height: 28px;
+    padding: 0 11px;
+    border: 1px solid #d1d5db;
+    border-radius: 9999px;
+    background: #fff;
+    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: none;
+    transition: all 0.15s ease;
+}
+
+/* GET - 파란색 */
+.method-filters button.method-filter.get {
+    --method-color: #2563eb;
+    --method-light: #eff6ff;
+}
+
+/* POST - 초록색 */
+.method-filters button.method-filter.post {
+    --method-color: #16a34a;
+    --method-light: #f0fdf4;
+}
+
+/* PUT - 주황색 */
+.method-filters button.method-filter.put {
+    --method-color: #ea580c;
+    --method-light: #fff7ed;
+}
+
+/* PATCH - 보라색 */
+.method-filters button.method-filter.patch {
+    --method-color: #9333ea;
+    --method-light: #faf5ff;
+}
+
+/* DELETE - 빨간색 */
+.method-filters button.method-filter.delete {
+    --method-color: #dc2626;
+    --method-light: #fef2f2;
+}
+
+/* 선택하지 않은 버튼 */
+.method-filters button.method-filter:not(.active):not(.all) {
+    color: var(--method-color);
+    border-color: var(--method-color);
+    background: var(--method-light);
+}
+
+/* 선택된 버튼 */
+.method-filters button.method-filter.active:not(.all) {
+    background: var(--method-color);
+    border-color: var(--method-color);
+    color: #fff;
+}
+
+/* 전체 버튼 */
+.method-filters button.method-filter.all.active {
+    background: #334155;
+    border-color: #334155;
+    color: #fff;
+}
+
+/* Hover */
+.method-filters button.method-filter:hover {
+    opacity: 0.8;
+}
+
+
+/* Request Body 고유값 자동 생성 */
+.unique-field-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #64748b;
+    cursor: pointer;
+}
+
+.unique-field-option input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    min-width: 15px;
+    margin: 0;
+    padding: 0;
+    accent-color: #2563eb;
+    cursor: pointer;
+}
+
+/* Request Body JSON 미리보기 */
+.request-preview {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.request-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.request-preview-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.request-preview-header button.preview-copy-button {
+    width: auto;
+    min-width: 0;
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.request-preview-header button.preview-copy-button:hover:not(:disabled) {
+    background: #f1f5f9;
+}
+
+.request-preview-header button.preview-copy-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.request-preview-code {
+    margin: 0;
+    padding: 14px;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 12px;
+    line-height: 1.7;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.request-preview-help {
+    margin: 9px 0 0;
+    color: #64748b;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.request-preview-error {
+    margin: 0;
+    padding: 12px;
+    border-radius: 8px;
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 12px;
+}
+
+
+/* PUT / PATCH / DELETE ID 분배 설정 */
+.path-distribution {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.path-distribution h3 {
+    margin: 0 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.path-distribution .field {
+    margin-bottom: 14px;
+}
+
+.path-distribution textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.path-distribution-summary {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    background: #eff6ff;
+}
+
+.path-distribution-summary strong {
+    display: block;
+    font-size: 12px;
+    color: #1d4ed8;
+}
+
+.path-distribution-summary p {
+    margin: 6px 0 0;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #475569;
+}
+
+.path-distribution .request-preview-error {
+    margin-top: 10px;
+}
+
+/* API Controller 그룹 */
+
+.api-group {
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+    margin-bottom: 10px;
+}
+
+.api-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    cursor: pointer;
+    user-select: none;
+    background: #f8fafc;
+    list-style: none;
+    transition: background 0.2s;
+}
+
+.api-group-header::-webkit-details-marker {
+    display: none;
+}
+
+.api-group-header:hover {
+    background: #f1f5f9;
+}
+
+.api-group-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.api-group-arrow {
+    display: inline-block;
+    font-size: 10px;
+    color: #64748b;
+    transition: transform 0.2s;
+}
+
+.api-group[open] .api-group-arrow {
+    transform: rotate(90deg);
+}
+
+.api-group-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: #e2e8f0;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.api-group-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.api-group-items .api-item {
+    width: 100%;
+    margin: 0;
+}
+
+/* API 목록 스크롤 */
+.api-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    height: 500px;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    padding-right: 6px;
+}
+
+/* 그룹은 목록의 높이에 맞춰 줄어들지 않도록 */
+.api-group {
+    flex-shrink: 0;
+    min-width: 0;
+}
+
+/* 그룹 내부에서 별도 스크롤이 생기지 않도록 */
+.api-group-items {
+    overflow: visible;
+    max-height: none;
+}
+
+/* API 카드 */
+.api-group-items .api-item {
+    flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* k6 테스트 실행 버튼 */
+.run-button {
+    display: block;
+    width: 100%;
+    min-height: 46px;
+    margin-top: 12px;
+    padding: 12px 18px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    background: #2563eb;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s, transform 0.2s;
+}
+
+.run-button:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.run-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 테스트 중단 버튼 */
+.run-button.cancel-button {
+    background: #dc2626;
+    color: #fff;
+}
+
+.run-button.cancel-button:hover:not(:disabled) {
+    background: #b91c1c;
+}
+
+.run-button.cancel-button:disabled {
+    background: #7f1d1d;
+}
+
+/* 실행 상태 표시 */
+.k6-run-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.k6-run-status::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.k6-run-status.is-running::before {
+    animation: k6-status-pulse 1.4s ease-in-out infinite;
+}
+
+.k6-run-status.is-cleaning {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.k6-run-status.is-cancelling {
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+@keyframes k6-status-pulse {
+    50% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .k6-run-status::before {
+        animation: none;
+    }
+}
+
+/* Live k6 monitor */
+.live-monitor-heading {
+    display:flex;
+    align-items:center;
+    justify-content:space-between; gap:12px;
+    margin-bottom:16px;
+}
+.live-monitor-heading h2 { margin:0; }
+.live-indicator { font-size:12px; font-weight:700; padding:6px 10px; border-radius:999px; color:#166534; background:#dcfce7; }
+.live-monitor-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:20px; }
+.live-stat { display:flex; flex-direction:column; gap:8px; padding:16px; background:#f6f8fb; border:1px solid #e5e9f0; border-radius:10px; }
+.live-stat span { font-size:12px; color:#64748b; }
+.live-stat strong { font-size:22px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+.live-chart-heading { font-size:13px; font-weight:700; margin-bottom:10px; }
+.live-chart { width:100%; height:160px; display:block; background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; margin-bottom:12px; }
+@media (max-width:800px) { .live-monitor-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:480px) { .live-stat { padding:12px; } .live-stat strong { font-size:18px; } }
+
+/* 실시간 RPS 그래프: 시간 및 RPS 축 눈금 */
+.live-chart-container { margin-bottom: 12px; }
+.live-chart-container .live-chart { height: auto; aspect-ratio: 640 / 190; margin-bottom: 0; overflow: visible; }
+.live-chart-label { fill: #64748b; font-size: 12px; font-family: Arial, "Noto Sans KR", sans-serif; font-variant-numeric: tabular-nums; }
+.live-chart-axis-title { margin-top: 5px; text-align: center; font-size: 12px; color: #64748b; }
+
+/* Recharts live performance panel */
+.live-chart-panel { padding: 20px 20px 12px; margin: 4px 0 14px; background: #fff; border: 1px solid #e2e8f0; border-radius: 14px; box-shadow: 0 4px 18px rgba(15,23,42,.035); }
+.live-chart-topline { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.live-chart-overline { color: #94a3b8; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+.live-chart-topline h3 { margin: 5px 0 0; font-size: 17px; color: #172033; }
+.live-chart-topline h3 span { margin-left: 6px; font-size: 11px; font-weight: 700; color: #2563eb; background: #eff6ff; padding: 3px 7px; border-radius: 6px; }
+.live-chart-period { flex-shrink: 0; font-size: 12px; color: #64748b; background: #f8fafc; border: 1px solid #edf2f7; padding: 7px 10px; border-radius: 8px; }
+.live-chart-panel .live-chart-container { width: 100%; height: 270px; margin: 0; min-width: 0; }
+.live-chart-footer { display: flex; justify-content: space-between; gap: 12px; margin-top: 8px; padding: 12px 4px 2px; border-top: 1px solid #f1f5f9; color: #64748b; font-size: 12px; }
+.live-chart-footer > span { display: inline-flex; align-items: center; gap: 7px; }
+.live-chart-legend-dot { width: 8px; height: 8px; background: #2563eb; border-radius: 50%; display: inline-block; }
+@media(max-width:600px) { .live-chart-panel { padding: 14px 10px 10px; } .live-chart-topline { align-items: flex-start; } .live-chart-topline h3 { font-size: 14px; } .live-chart-period { font-size: 10px; } .live-chart-panel .live-chart-container { height: 230px; } }
+
+
+/* Four live charts in a compact 2x2 layout */
+.live-charts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.live-charts-grid .live-chart-panel {
+    min-width: 0;
+    margin: 0 !important;
+    padding: 14px 12px 10px;
+}
+.live-charts-grid .live-chart-topline {
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.live-charts-grid .live-chart-topline h3 { font-size: 14px; }
+.live-charts-grid .live-chart-container { height: 210px; }
+.live-charts-grid .live-chart-footer { font-size: 11px; }
+@media (max-width: 700px) {
+    .live-charts-grid .live-chart-container { height: 230px; }
+}
+
+/* Layout corrections: VU / duration and 2-by-2 live charts */
+.settings-grid > .field { min-width: 0; }
+.settings-grid > .field input,
+.settings-grid > .field select { min-width: 0; max-width: 100%; width: 100%; box-sizing: border-box; }
+.live-charts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: stretch; }
+.live-charts-grid > .live-chart-panel { min-width: 0; width: 100%; box-sizing: border-box; }
+.live-charts-grid .live-chart-topline { min-width: 0; }
+.live-charts-grid .live-chart-topline > div { min-width: 0; }
+.live-charts-grid .live-chart-period { white-space: normal; }
+@media (min-width: 701px) {
+    .live-charts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+    .live-charts-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+    .settings-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Ramp-up / hold / Ramp-down settings */
+.ramp-stages { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin:0 0 18px; }
+.ramp-stages > .field { min-width:0; margin-bottom:0; }
+.ramp-stages > small { grid-column:1/-1; }
+.ramp-stages select { min-width:0; width:100%; }
+@media (max-width:600px) { .ramp-stages { grid-template-columns:minmax(0,1fr); } }
+@media (min-width: 801px) { .live-monitor-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+
+/* Threshold configuration and evaluation */
+.threshold-config {
+    margin: 20px 0;
+    padding: 18px;
+    border: 1px solid #dbe4f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    min-width: 0;
+}
+.threshold-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: #172033;
+    font-size: 14px;
+}
+.threshold-toggle input[type="checkbox"] {
+    appearance: auto;
+    width: 17px;
+    height: 17px;
+    min-width: 17px;
+    margin: 0;
+    padding: 0;
+    accent-color: #2563eb;
+    flex: none;
+}
+/* Threshold 설정 */
+.threshold-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: start;
+}
+
+.threshold-grid .field {
+    min-width: 0;
+    margin-bottom: 0;
+}
+
+.threshold-grid .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.threshold-grid .field input {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+}
+
+/* 좁은 화면에서는 세로 배치 */
+@media (max-width: 700px) {
+    .threshold-grid {
+        grid-template-columns: 1fr;
+    }
+}
+.threshold-result {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #dbe4f0;
+    border-radius: 12px;
+    background: #f8fafc;
+    min-width: 0;
+}
+.threshold-result h3 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 0 0 16px;
+    font-size: 16px;
+}
+.threshold-status {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 800;
+}
+.threshold-pass, .threshold-status.threshold-pass { color: #15803d; }
+.threshold-fail, .threshold-status.threshold-fail { color: #b91c1c; }
+.threshold-status.threshold-pass { background: #dcfce7; }
+.threshold-status.threshold-fail { background: #fee2e2; }
+.threshold-status.threshold-unavailable { color: #92400e; background: #fef3c7; }
+.threshold-checks { display: flex; flex-direction: column; gap: 8px; }
+.threshold-check {
+    display: grid;
+    grid-template-columns: minmax(120px, 1.4fr) minmax(100px, 1fr) minmax(100px, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    background: #fff;
+    font-size: 13px;
+    min-width: 0;
+}
+.threshold-check > :first-child { font-weight: 700; }
+.threshold-check > :last-child { text-align: right; font-weight: 800; }
+@media (max-width: 1000px) {
+    .threshold-grid { grid-template-columns: minmax(0, 1fr); }
+    .threshold-check { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .threshold-check > :last-child { text-align: left; }
+}
+@media (max-width: 480px) {
+    .threshold-config, .threshold-result { padding: 14px; }
+    .threshold-check { gap: 6px; padding: 12px; }
+}
+
+
+.threshold-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.threshold-grid .field {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin-bottom: 0;
+    gap: 8px;
+}
+
+.threshold-grid .field label {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.threshold-grid .field input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .threshold-grid {
+        grid-template-columns: 1fr;
+    }
+}
